@@ -29,23 +29,25 @@ void plotPoints(float x, float y, float z, float u, float v, float w, float nx, 
 
 
 // asteroid
-void plotAsteroid() {
+void plotModel(float *vertex, float *texture, float *normal, int *faces, int TOTAL_FACES) {
 
   int i;
 
   glColor3f(.17, .17, .17);
-  for(i = 0; i < ASTEROID_TOTAL_FACES; i++) {
+  for(i = 0; i < TOTAL_FACES; i++) {
     int j;
 
     glBegin(GL_POLYGON);
-    for(j = 1; j <= aFaces[i][0][0]; j++) {
+    for(j = 1; j <= *(faces + (i*MAX_FACES*3)); j++) {
 
-      int v = aFaces[i][j][0] - 1,
-        t = aFaces[i][j][1] - 1,
-        n = aFaces[i][j][2] - 1;
-      plotPoints(aVertex[v][0], aVertex[v][1], aVertex[v][2],
-        aTexture[t][0], aTexture[t][1], aTexture[t][2],
-        aNormal[n][0], aNormal[n][1], aNormal[n][2]);
+
+      int v = *(faces + (i*MAX_FACES*3) + (j*3)) - 1,
+        t = *(faces + (i*MAX_FACES*3) + (j*3) + 1) - 1,
+        n = *(faces + (i*MAX_FACES*3) + (j*3) + 2) - 1;
+
+      plotPoints(*(vertex + (v*3)), *(vertex + (v*3) + 1), *(vertex + (v*3) + 2),
+        *(texture + (t*3)), *(texture + (t*3) + 1), *(texture + (t*3) + 2),
+        *(normal + (n*3)), *(normal + (n*3) + 1), *(normal + (n*3) + 2));
     }
     glEnd();
   }
