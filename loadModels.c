@@ -1,9 +1,9 @@
 
-#define MAX_VERTICES 8000
-#define MAX_TEXTURES 8000
-#define MAX_NORMALS 8000
-#define MAX_FACES 8000
-#define MAX_POINTS 8000
+#define MAX_VERTICES 7500
+#define MAX_TEXTURES 7500
+#define MAX_NORMALS 7500
+#define MAX_FACES 7500
+#define MAX_POINTS 7500
 
 float vertex[MAX_VERTICES][3], aVertex[MAX_VERTICES][3];
 float texture[MAX_TEXTURES][3], aTexture[MAX_TEXTURES][3];
@@ -48,7 +48,6 @@ void plotModel(char type) {
     }
   } else if(type == 'a') {
 
-    glColor3f(.17, .17, .17);
     for(i = 0; i < ASTEROID_TOTAL_FACES; i++) {
       int j;
 
@@ -88,7 +87,7 @@ void updateValues(char type, int i, float *ptr) {
 // asteroid
 void loadAsteroid() {
 
-  FILE* fv = fopen("./models/Asteroid.obj", "r");
+  FILE* fv = fopen("./models/Asteroid1.obj", "r");
 
   int f[3];
   int i = 0, k = 0, m = 0, o = 0;
@@ -120,15 +119,15 @@ void loadAsteroid() {
     } else if (strcmp(lineHeader, "v") == 0) {
 
       readLine(fv);
-      updateValues('v', i++, &vertex[0][0]);
+      updateValues('v', i++, &aVertex[0][0]);
     } else if (strcmp(lineHeader, "vt") == 0) {
 
       readLine(fv);
-      updateValues('t', k++, &texture[0][0]);
+      updateValues('t', k++, &aTexture[0][0]);
     } else if (strcmp(lineHeader, "vn") == 0) {
 
       readLine(fv);
-      updateValues('n', m++, &normal[0][0]);
+      updateValues('n', m++, &aNormal[0][0]);
     }
   }
   fclose(fv);

@@ -4,7 +4,7 @@
 #include <string.h>
 #include <GL/glut.h>
 
-#define SCREEN_WIDTH 1000
+#define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1000
 #define SCREEN_DEPTH 1000
 
@@ -15,7 +15,16 @@
 #include "glutFunctions.c"
 
 int axis = 1, cx = 0, cy = 0, cz = 0;
+int ax = 0, ay = 0, az = 0;
 float theta[] = {0, 0, 0};
+
+// idle
+void moveAsteroid() {
+  // ay++;
+  az += 1;
+  printf("%d\n", az);
+  glutPostRedisplay();
+}
 
 void special(int key, int X, int Y) {
 
@@ -51,26 +60,25 @@ void display() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   glLoadIdentity();
+  glRotatef(40, 1, 0, 0);
 
   // spaceship
   glPushMatrix();
-    glRotatef(40, 1, 0, 0);
     glRotatef(180, 0, 1, 0);
-    glRotatef(0, 0, 0, 1);
-    glTranslatef(0, -(SCREEN_HEIGHT / 2) + 200, 0);
-    glScalef(0.15, 0.15, 0.15);
-    glTranslatef(cx, cy, cz);
-
-    glColor3f(0, 0, 0);
+    glTranslatef(0, -(SCREEN_HEIGHT / 2) + 100, -100);
+    glScalef(0.25, 0.25, 0.075);
+    glTranslatef(cx, cy, -10);
+    glColor3f(1, 0, 1);
     plotModel('s');
   glPopMatrix();
 
   // asteroid
   glPushMatrix();
-    glTranslatef(0, 100, -500);
-    glScalef(.1, .1, .1);
-    glColor3f(1, 0, 0);
-    // plotModel('a');
+    glTranslatef(0, 0, -500);
+    // glScalef(.1, .1, .1);
+    glTranslatef(ax, ay, az);
+    glColor3f(.17, .17, .17);
+    plotModel('a');
   glPopMatrix();
 
   glFlush();
@@ -80,8 +88,8 @@ void display() {
 int main (int argc, char *argv[]) {
 
   // load models
-  // loadAsteroid();
   loadSpaceShip();
+  loadAsteroid();
 
   glutInit(&argc, argv);
 

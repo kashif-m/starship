@@ -2,9 +2,10 @@
 // init
 void init() {
 
+   glPointSize(10);
    GLfloat mat_ambient[] = { 0, 1, 1, 0.0 };
    GLfloat mat_shininess[] = { 5.0 };
-   GLfloat light_position[] = { 0.0, 100.0, 100.0, 1.0 };
+   GLfloat light_position[] = { 0.0, 2000.0, 0, 1.0 };
 
    glClearColor(0.0, 0.0, 0.0, 0.0);
    glShadeModel(GL_SMOOTH);
@@ -19,23 +20,19 @@ void init() {
    glEnable(GL_DEPTH_TEST);
 }
 
-// idle
-void moveAsteroid() {
-
-  glutPostRedisplay();
-}
-
 // reshape
 void reshape(int w, int h) {
 
-  glClearColor(.1, .1, .1, 1);
-  glViewport(0, 0, w, h);
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
+   glClearColor(.1, .1, .1, 1);
+   glViewport(0, 0, w, h);
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
 
-  float negX = -w / 2, posX = w / 2,
-        negY = -h / 2, posY = h / 2;
+   float negX = -w / 2, posX = w / 2,
+         negY = -h / 2, posY = h / 2;
 
-  glOrtho(negX, posX, negY, posY, -SCREEN_DEPTH / 2, SCREEN_DEPTH / 2);
-  glMatrixMode(GL_MODELVIEW);
+   // gluLookAt(0, 0, -1000, 0, 0, 0, 0, 1, 0);
+   // glOrtho(negX, posX, negY, posY, -SCREEN_DEPTH / 2, SCREEN_DEPTH / 2);
+   glFrustum(negX, posX, negY, posY, 100, SCREEN_DEPTH*10);
+   glMatrixMode(GL_MODELVIEW);
 }
