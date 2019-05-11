@@ -1,11 +1,14 @@
 
+#define NEAR_VAL 200
+#define FAR_VAL SCREEN_DEPTH*2
+
 // init
 void init() {
 
    glPointSize(10);
-   GLfloat mat_ambient[] = { 0, 1, 1, 0.0 };
+   GLfloat mat_ambient[] = { .5, .5, .5, 0.0 };
    GLfloat mat_shininess[] = { 5.0 };
-   GLfloat light_position[] = { 0.0, 2000.0, 0, 1.0 };
+   GLfloat light_position[] = { 0.0, 1000.0, 0, 1.0 };
 
    glClearColor(0.0, 0.0, 0.0, 0.0);
    glShadeModel(GL_SMOOTH);
@@ -32,7 +35,6 @@ void reshape(int w, int h) {
          negY = -h / 2, posY = h / 2;
 
    // gluLookAt(0, 0, -1000, 0, 0, 0, 0, 1, 0);
-   // glOrtho(negX, posX, negY, posY, -SCREEN_DEPTH / 2, SCREEN_DEPTH / 2);
-   glFrustum(negX, posX, negY, posY, 100, SCREEN_DEPTH*10);
+   glFrustum(negX, posX, negY, posY, NEAR_VAL, FAR_VAL);
    glMatrixMode(GL_MODELVIEW);
 }
