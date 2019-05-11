@@ -4,6 +4,7 @@
 #include <string.h>
 #include <GL/glut.h>
 #include <time.h>
+#include <unistd.h>
 
 int axis = 1, cx = 0, cy = 0, cz = 0, count = 0;
 int ax = 0, ay = 0, az = 0;
@@ -50,7 +51,6 @@ void special(int key, int X, int Y) {
 void display() {
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
   glLoadIdentity();
 
   // spaceship
@@ -71,7 +71,25 @@ void display() {
   glutSwapBuffers();
 }
 
+void killAudio() {
+  system("kill -9 ");
+}
+
+void startAudio() {
+
+  pid_t x;
+  x = fork();
+
+  if (x < 0)
+    puts("ERR: fork failure");
+  else if (x == 0)
+    execlp("mpg123", "mpg123", "-q", "./lpwu.mp3", 0);
+}
+
 int main (int argc, char *argv[]) {
+
+  // audio
+  startAudio();
 
   // load models
   loadSpaceShip();
@@ -95,8 +113,10 @@ int main (int argc, char *argv[]) {
   glutSpecialFunc(special);
   glutIdleFunc(moveAsteroid);
   
-  glEnable(GL_DEPTH_TEST);
   glutMainLoop();
 
   return 0;
 }
+
+// REFERENCE FOR AUDIO
+// https://cboard.cprogramming.com/linux-programming/105923-c-program-play-sound.html

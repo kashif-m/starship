@@ -13,7 +13,7 @@ struct asteroid {
 
 struct asteroid A[MAX_ASTEROIDS];
 
-void update(struct asteroid* a, int x, int y, int z) {
+void initialise(struct asteroid* a, int x, int y, int z) {
   a->tx = x; a->ty = y; a->tz = z;
   a->done = 0;
 }
@@ -22,7 +22,6 @@ void plotAsteroid(struct asteroid a) {
 
   glPushMatrix();
     glScalef(.5, .5, .5);
-    // glTranslatef(x, y, z);
     glTranslatef(a.tx, a.ty, a.tz);
     glRotatef(a.rx, 1, 0, 0);
     glColor3f(.17, .17, .17);
@@ -32,7 +31,7 @@ void plotAsteroid(struct asteroid a) {
 
 // idle
 void moveAsteroid() {
-  // ay++;
+
   int i;
   for(i = 0; i < ASTEROID_COUNT; i++) {
     A[i].tz += ASTEROID_SPEED;
@@ -53,7 +52,7 @@ void spawnAsteroid(int i) {
   y = (rand() % SCREEN_HEIGHT*3 + 1) - (SCREEN_HEIGHT*3 / 2);
   z = -FAR_VAL - 100;
 
-  update(&A[i], x, y, z);
+  initialise(&A[i], x, y, z);
   ASTEROID_COUNT++;
 }
 
@@ -67,9 +66,8 @@ void asteroids(int* count) {
 
   for(i = 0; i < ASTEROID_COUNT; i++) {
     
-    if(!A[i].done) {
+    if(!A[i].done)
       plotAsteroid(A[i]);
-    }
     else {
       ASTEROID_COUNT--;
       spawnAsteroid(i);
