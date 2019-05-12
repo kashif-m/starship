@@ -84,7 +84,6 @@ void updateValues(char type, int i, float *ptr) {
   }
 }
 
-// asteroid
 void loadAsteroid() {
 
   FILE* fv = fopen("./models/Asteroid1.obj", "r");
@@ -134,7 +133,6 @@ void loadAsteroid() {
   ASTEROID_TOTAL_FACES = o;
 }
 
-// spaceship
 void loadSpaceShip() {
 
   FILE *vf = fopen("./models/Starship.obj", "r");

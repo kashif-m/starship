@@ -6,90 +6,37 @@
 #include <time.h>
 #include <unistd.h>
 
-int axis = 1, cx = 0, cy = 0, cz = 0, count = 0;
-int ax = 0, ay = 0, az = 0;
+int count = 0, CURRENT_WIDTH = 0, CURRENT_HEIGHT = 0;
 float theta[] = {0, 0, 0};
 
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1000
 #define SCREEN_DEPTH 1000
 
+#include "audio.c"
 #include "loadModels.c"
 #include "glutFunctions.c"
 #include "asteroid.c"
-
-void special(int key, int X, int Y) {
-
-  switch(key) {
-    case GLUT_KEY_UP:
-      if(cy < SCREEN_HEIGHT)
-        cy += 50;
-      break;
-
-    case GLUT_KEY_DOWN:
-      if(cy > -SCREEN_HEIGHT / 4)
-        cy -= 50;
-      break;
-
-    case GLUT_KEY_RIGHT:
-      if(cx > (-SCREEN_WIDTH / 2) - 150)
-        cx -= 50;
-      break;
-    
-    case GLUT_KEY_LEFT:
-      if(cx < (SCREEN_WIDTH / 2) + 150)
-        cx += 50;
-      break;
-
-    default:
-      break;
-  }
-
-  glutPostRedisplay();
-}
+#include "spaceship.c"
 
 void display() {
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glLoadIdentity();
 
-  // spaceship
-  glPushMatrix();
-    glRotatef(180, 0, 1, 0);
-    glTranslatef(0, -(SCREEN_HEIGHT / 2) + 100, NEAR_VAL + 100);
-    glTranslatef(cx, cy, 0);
-    glScalef(0.25, 0.25, 0.045);
-    glColor3f(1, 0, 1);
-    plotModel('s');
-  glPopMatrix();
-
-  // asteroid
-  count++;
+  spaceship();
   asteroids(&count);
 
   glFlush();
   glutSwapBuffers();
-}
 
-void killAudio() {
-  system("kill -9 ");
-}
-
-void startAudio() {
-
-  pid_t x;
-  x = fork();
-
-  if (x < 0)
-    puts("ERR: fork failure");
-  else if (x == 0)
-    execlp("mpg123", "mpg123", "-q", "./lpwu.mp3", 0);
+  count++;
 }
 
 int main (int argc, char *argv[]) {
 
   // audio
-  startAudio();
+  // startAudio();
 
   // load models
   loadSpaceShip();
@@ -110,7 +57,7 @@ int main (int argc, char *argv[]) {
   // glut functions
   glutDisplayFunc(display);
   glutReshapeFunc(reshape);
-  glutSpecialFunc(special);
+  glutSpecialFunc(moveSpaceship);
   glutIdleFunc(moveAsteroid);
   
   glutMainLoop();
