@@ -6,19 +6,19 @@
 #include <time.h>
 #include <unistd.h>
 
-int count = 0, CURRENT_WIDTH = 0, CURRENT_HEIGHT = 0;
+int count = 0, count1 = 0, CURRENT_WIDTH = 0, CURRENT_HEIGHT = 0;
 float theta[] = {0, 0, 0};
 
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1000
 #define SCREEN_DEPTH 1000
 
+#include "glutFunctions.c"
 #include "audio.c"
 #include "loadModels.c"
-#include "glutFunctions.c"
 #include "star.c"
 #include "asteroid.c"
-#include "spaceship.c"
+#include "starship.c"
 
 void display() {
 
@@ -27,18 +27,18 @@ void display() {
 
   glEnable(GL_LIGHT0);
   glEnable(GL_LIGHT1);
-     asteroids(&count);
+    asteroids(&count);
   glDisable(GL_LIGHT0);
   glDisable(GL_LIGHT1);
 
-    spaceship();
+  plotStarship();
 
   glEnable(GL_LIGHT2);
   glEnable(GL_LIGHT3);
   glEnable(GL_LIGHT4);
     glDisable(GL_POLYGON_OFFSET_FILL);
       glLineWidth(1.5);
-      spaceshipWire();
+      plotStarshipWire();
     glEnable(GL_POLYGON_OFFSET_FILL);
   glPolygonOffset(1.0, 1.0);
   glDisable(GL_LIGHT2);
@@ -46,13 +46,14 @@ void display() {
   glDisable(GL_LIGHT4);
 
   glEnable(GL_LIGHT5);
-    stars(&count);
+    stars(&count1);
   glDisable(GL_LIGHT5);
 
   glFlush();
   glutSwapBuffers();
 
   count++;
+  count1++;
 }
 
 int main (int argc, char *argv[]) {
@@ -61,8 +62,8 @@ int main (int argc, char *argv[]) {
   // startAudio();
 
   // load models
-  loadSpaceShip();
-  loadAsteroid();
+  loadModel(&starship, "Starship.obj");
+  loadModel(&asteroid, "Asteroid1.obj");
 
   srand(time(0));
   spawnAsteroid(0);
@@ -79,7 +80,7 @@ int main (int argc, char *argv[]) {
   // glut functions
   glutDisplayFunc(display);
   glutReshapeFunc(reshape);
-  glutSpecialFunc(moveSpaceship);
+  glutSpecialFunc(moveStarship);
   glutIdleFunc(moveAsteroid);
   
   glutMainLoop();

@@ -1,8 +1,8 @@
 
-#define MAX_STARS 100
-#define MIN_SPEED_STAR 2
+#define MAX_STARS 1000
+#define MIN_SPEED_STAR 10
 #define SPAWN_FREQUENCY_STAR 1
-#define MAX_RADIUS 3
+#define MAX_RADIUS 2
 
 int STAR_COUNT = 0;
 
@@ -13,7 +13,6 @@ struct star {
 
 struct star S[MAX_STARS];
 
-// idle function
 void moveStar() {
 
   int i;
@@ -22,7 +21,6 @@ void moveStar() {
     if(S[i].tz > -NEAR_VAL)
       S[i].done = 1;
   }
-  glutPostRedisplay();
 }
 
 void initialiseStar(struct star* s, int x, int y, int z, int radius, int speed) {
@@ -37,7 +35,6 @@ void plotStar(struct star s) {
   glPushMatrix();
     glTranslatef(s.tx, s.ty, s.tz);
     glColor3f(1, 0, 0);
-    // glTranslatef();
     glutSolidSphere(s.radius, 10, 10);
   glPopMatrix();
 }

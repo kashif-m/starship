@@ -1,8 +1,8 @@
 
-#define MAX_ASTEROIDS 10
+#define MAX_ASTEROIDS 100
 #define MIN_SPEED_ASTEROID 5
 #define MAX_SPEED_ASTEROID 15
-#define SPAWN_FREQUENCY_ASTEROID 10
+#define SPAWN_FREQUENCY_ASTEROID 100
 
 int ASTEROID_COUNT = 0;
 
@@ -51,7 +51,7 @@ void plotAsteroid(struct asteroid a) {
     glTranslatef(a.tx, a.ty, a.tz);
     glRotatef(a.rx, 1, 0, 0);
     glColor3f(.17, .17, .17);
-    plotModel('a');
+    plotModel(&asteroid, 'P');
   glPopMatrix();
 }
 

@@ -2,7 +2,7 @@
 int cx = 0, cy = 0, cz = 0;
 
 // special function
-void moveSpaceship(int key, int X, int Y) {
+void moveStarship(int key, int X, int Y) {
 
   switch(key) {
     case GLUT_KEY_UP:
@@ -32,24 +32,24 @@ void moveSpaceship(int key, int X, int Y) {
   glutPostRedisplay();
 }
 
-void spaceship() {
+void plotStarship() {
   glPushMatrix();
     glTranslatef(0, -(CURRENT_HEIGHT / 2) + 200, -320);
     glTranslatef(cx, cy, 0);
     glRotatef(180, 0, 1, 0);  
     glScalef(0.15, 0.25, 0.15);
     glColor3f(1, 0, 1);
-    plotModel('s');
+    plotModel(&starship, 'P');
   glPopMatrix();
 }
 
-void spaceshipWire() {
+void plotStarshipWire() {
   glPushMatrix();
     glTranslatef(0, -(CURRENT_HEIGHT / 2) + 200, -320);
     glTranslatef(cx, cy, 0);
     glRotatef(180, 0, 1, 0);  
     glScalef(0.15, 0.25, 0.15);
     glColor3f(1, 0, 1);
-    plotModel('w');
+    plotModel(&starship, 'L');
   glPopMatrix();
 }
