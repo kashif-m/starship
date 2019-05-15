@@ -1,7 +1,8 @@
 
 #define MAX_ASTEROIDS 10
-#define MIN_SPEED 20
-#define SPAWN_FREQUENCY 100
+#define MIN_SPEED_ASTEROID 5
+#define MAX_SPEED_ASTEROID 15
+#define SPAWN_FREQUENCY_ASTEROID 10
 
 int ASTEROID_COUNT = 0;
 
@@ -17,6 +18,7 @@ struct asteroid A[MAX_ASTEROIDS];
 // idle function
 void moveAsteroid() {
 
+  moveStar();
   if(theta[0] > 360)
     theta[0] = 0;
   theta[0] += 1;
@@ -59,9 +61,9 @@ void spawnAsteroid(int i) {
   x = (rand() % SCREEN_WIDTH*3 + 1) - (SCREEN_WIDTH*3 / 2);
   y = (rand() % SCREEN_HEIGHT*3 + 1) - (SCREEN_HEIGHT*3 / 2);
   z = -FAR_VAL - 100;
-  speed = (rand() % 40 + 1);
-  if(speed < MIN_SPEED)
-    speed = MIN_SPEED;
+  speed = (rand() % MAX_SPEED_ASTEROID + 1);
+  if(speed < MIN_SPEED_ASTEROID)
+    speed = MIN_SPEED_ASTEROID;
 
   float sx, sy, sz;
   sx = ((float)rand()) / ((float)RAND_MAX) / 2.0 + 0.3;
@@ -75,7 +77,7 @@ void spawnAsteroid(int i) {
 void asteroids(int* count) {
 
   int i;
-  if(*count == SPAWN_FREQUENCY && ASTEROID_COUNT < MAX_ASTEROIDS) {
+  if(*count == SPAWN_FREQUENCY_ASTEROID && ASTEROID_COUNT < MAX_ASTEROIDS) {
     spawnAsteroid(ASTEROID_COUNT);
     *count = 0;
   }

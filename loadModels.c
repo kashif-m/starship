@@ -32,7 +32,8 @@ void plotModel(char type) {
 
     for(i = 0; i < TOTAL_FACES; i++) {
       int j;
-
+      
+      glColor3f(1.0,0.5,0.0);
       glBegin(GL_POLYGON);
       for(j = 1; j <= faces[i][0][0]; j++) {
 
@@ -60,6 +61,25 @@ void plotModel(char type) {
         plotPoints(aVertex[v][0], aVertex[v][1], aVertex[v][2],
           aTexture[t][0], aTexture[t][1], aTexture[t][2],
           aNormal[n][0], aNormal[n][1], aNormal[n][2]);
+      }
+      glEnd();
+    }
+  } if(type == 'w') {
+
+    for(i = 0; i < TOTAL_FACES; i++) {
+      int j;
+      
+      glColor3f(1.0,0.5,0.0);
+      glBegin(GL_LINE_LOOP);
+      for(j = 1; j <= faces[i][0][0]; j++) {
+
+        int v = faces[i][j][0] - 1,
+          t = faces[i][j][1] - 1,
+          n = faces[i][j][2] - 1;
+
+        plotPoints(vertex[v][0], vertex[v][1], vertex[v][2],
+          texture[t][0], texture[t][1], texture[t][2],
+          normal[n][0], normal[n][1], normal[n][2]);
       }
       glEnd();
     }

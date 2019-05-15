@@ -16,6 +16,7 @@ float theta[] = {0, 0, 0};
 #include "audio.c"
 #include "loadModels.c"
 #include "glutFunctions.c"
+#include "star.c"
 #include "asteroid.c"
 #include "spaceship.c"
 
@@ -24,8 +25,29 @@ void display() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glLoadIdentity();
 
-  spaceship();
-  asteroids(&count);
+  glEnable(GL_LIGHT0);
+  glEnable(GL_LIGHT1);
+     asteroids(&count);
+  glDisable(GL_LIGHT0);
+  glDisable(GL_LIGHT1);
+
+    spaceship();
+
+  glEnable(GL_LIGHT2);
+  glEnable(GL_LIGHT3);
+  glEnable(GL_LIGHT4);
+    glDisable(GL_POLYGON_OFFSET_FILL);
+      glLineWidth(1.5);
+      spaceshipWire();
+    glEnable(GL_POLYGON_OFFSET_FILL);
+  glPolygonOffset(1.0, 1.0);
+  glDisable(GL_LIGHT2);
+  glDisable(GL_LIGHT3);
+  glDisable(GL_LIGHT4);
+
+  glEnable(GL_LIGHT5);
+    stars(&count);
+  glDisable(GL_LIGHT5);
 
   glFlush();
   glutSwapBuffers();
