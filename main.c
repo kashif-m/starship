@@ -62,8 +62,8 @@ int main (int argc, char *argv[]) {
   // startAudio();
 
   // load models
-  loadModel(&starship, "Starship.obj");
   loadModel(&asteroid, "Asteroid1.obj");
+  loadModel(&starship, "Starship.obj");
 
   srand(time(0));
   spawnAsteroid(0);

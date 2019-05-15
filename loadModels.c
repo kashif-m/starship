@@ -10,6 +10,10 @@ struct Model {
   float texture[MAX_TEXTURES][3];
   float normal[MAX_NORMALS][3];
   int faces[MAX_FACES][MAX_POINTS][3], TOTAL_FACES;
+  int cx, cy, cz,
+    xMax, xMin,
+    yMax, yMin,
+    zMax, zMin;
 };
 
 char lineHeader[128];
@@ -52,13 +56,34 @@ void plotModel(struct Model* model, char type) {
   }
 }
 
+int min(int a, int b) {
+  return a < b ? a : b;
+}
+
+int max(int a, int b) {
+  return a > b ? a : b;
+}
+
+void computeMinMax(int x, int y, int z) {
+
+  starship.xMin = min(starship.xMin, x);
+  starship.xMax = max(starship.xMax, x);
+
+  starship.yMin = min(starship.yMin, y);
+  starship.yMax = max(starship.yMax, y);
+
+  starship.zMin = min(starship.zMin, z);
+  starship.zMax = max(starship.zMax, z);
+}
+
 void updateValues(char type, int i, float *ptr) {
 
   float v[3];
   int j;
   sscanf(lineHeader, "%f %f %f", &v[0], &v[1], &v[2]);
   switch(type) {
-    case 'v': for(j = 0; j < 3; j++)
+    case 'v': computeMinMax(v[0], v[1], v[2]);
+              for(j = 0; j < 3; j++)
                 *(ptr + (i*3) + j) = v[j];
               break;
     case 't': for(j = 0; j < 3; j++)
@@ -68,6 +93,14 @@ void updateValues(char type, int i, float *ptr) {
                 *(ptr + (i*3) + j) = v[j];
               break;
   }
+}
+
+void computeCenter(struct Model* model) {
+  model->cx = (model->xMax + model->xMin) / 2;
+  model->cy = (model->yMax + model->yMin) / 2;
+  model->cz = (model->zMax + model->zMin) / 2;
+
+  printf("%d %d %d\n", model->cx, model->cy, model->cz);
 }
 
 void loadModel(struct Model* model, char filename[]) {
@@ -119,4 +152,5 @@ void loadModel(struct Model* model, char filename[]) {
   }
   fclose(fv);
   model->TOTAL_FACES = o;
+  computeCenter(model);
 }
