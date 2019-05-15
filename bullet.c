@@ -4,19 +4,21 @@ int tx, ty, tz, done = 1;
 void bullets() {
   
   glPushMatrix();
-    glTranslatef(0, -(CURRENT_HEIGHT / 2) + 200, -820);
+    glTranslatef(130, -(CURRENT_HEIGHT / 2) + 200, -800);
     glScalef(0.25, 0.25, 0.25);
     glRotatef(180, 0, 1, 0);  
     glColor3f(1, 0, 1);
 
     glTranslatef(tx, ty, tz);
-    glutSolidSphere(50, 100, 10);
+    glutSolidSphere(50, 4, 10);
+       glTranslatef(1050, 0, 0);
+    glutSolidSphere(50, 4, 10);
   glPopMatrix();
 }
 
 void moveBullet() {
   if(!done)
-    tz += 300; 
+    tz += 500; 
 }
 
 void spawnBullet() {

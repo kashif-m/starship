@@ -71,8 +71,8 @@ void starsLight() {
 
 void bulletLight() {
 
-	// red
-	GLfloat mat_ambient[] = { 1, .5, 0, 1.0 };
+	// Orange
+	GLfloat mat_ambient[] = { 1, 0.2, 0, 1.0 };
 	GLfloat light_position[] = { 0, 0, 1000, 0.0 };
 
 	glLightfv(GL_LIGHT6, GL_AMBIENT, mat_ambient);

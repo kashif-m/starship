@@ -2,7 +2,7 @@
 #define MAX_STARS 500
 #define MIN_SPEED_STAR 50
 #define SPAWN_FREQUENCY_STAR 1
-#define MAX_RADIUS 2
+#define MAX_RADIUS 3
 
 int STAR_COUNT = 0;
 
