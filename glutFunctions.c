@@ -84,6 +84,7 @@ void bulletLight() {
 // init
 void init() {
 
+	glLineWidth(1.5);
 	glPointSize(10);
 	glShadeModel(GL_SMOOTH);
 	
@@ -122,7 +123,7 @@ void reshape(int w, int h) {
 	float negX = -w / 2, posX = w / 2,
 				negY = -h / 2, posY = h / 2;
 
-	gluLookAt(0, 0, 0, 0, 0, -100, 0, 1, 0);
+	// gluLookAt(0, 0, 0, 0, 0, -100, 0, 1, 0);
 	glFrustum(negX, posX, negY, posY, NEAR_VAL, FAR_VAL);
 	glMatrixMode(GL_MODELVIEW);
 }

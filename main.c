@@ -21,40 +21,18 @@ float theta[] = {0, 0, 0};
 #include "bullet.c"
 #include "asteroid.c"
 #include "starship.c"
+#include "plotter.c"
 
 void display() {
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glLoadIdentity();
 
-  glEnable(GL_LIGHT0);
-  glEnable(GL_LIGHT1);
-    asteroids(&count);
-  glDisable(GL_LIGHT0);
-  glDisable(GL_LIGHT1);
-
+  plotAsteroids(&count);
   plotStarship();
-
-  glEnable(GL_LIGHT2);
-  glEnable(GL_LIGHT3);
-  glEnable(GL_LIGHT4);
-    glDisable(GL_POLYGON_OFFSET_FILL);
-      glLineWidth(1.5);
-      plotStarshipWire();
-    glEnable(GL_POLYGON_OFFSET_FILL);
-  glPolygonOffset(1.0, 1.0);
-  glDisable(GL_LIGHT2);
-  glDisable(GL_LIGHT3);
-  glDisable(GL_LIGHT4);
-
-  glEnable(GL_LIGHT5);
-    stars(&count1);
-  glDisable(GL_LIGHT5);
-
-  glEnable(GL_LIGHT6);
-  if(!done)    
-    bullets();
-  glDisable(GL_LIGHT6);
+  starshipWire();
+  plotStars(&count1);
+  plotBullet();
 
   glFlush();
   glutSwapBuffers();

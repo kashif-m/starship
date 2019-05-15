@@ -96,14 +96,14 @@ void updateValues(char type, int i, float *ptr) {
   }
 }
 
-void computeCenter(struct Model* model) {
+void computeAttributes(struct Model* model) {
   model->sizeX = fabs(model->xMax) + fabs(model->xMin);
   model->sizeY = fabs(model->yMax) + fabs(model->yMin);
   model->sizeZ = fabs(model->zMax) + fabs(model->zMin);
 
-  model->cx = (model->xMax) + (model->xMin) / 2;
-  model->cy = (model->yMax) + (model->yMin) / 2;
-  model->cz = (model->zMax) + (model->zMin) / 2;
+  model->cx = (model->xMax + model->xMin) / 2;
+  model->cy = (model->yMax + model->yMin) / 2;
+  model->cz = (model->zMax + model->zMin) / 2;
 }
 
 void loadModel(struct Model* model, char filename[]) {
@@ -155,5 +155,5 @@ void loadModel(struct Model* model, char filename[]) {
   }
   fclose(fv);
   model->TOTAL_FACES = o;
-  computeCenter(model);
+  computeAttributes(model);
 }
