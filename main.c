@@ -5,6 +5,7 @@
 #include <GL/glut.h>
 #include <time.h>
 #include <unistd.h>
+#include <math.h>
 
 int count = 0, count1 = 0, CURRENT_WIDTH = 0, CURRENT_HEIGHT = 0;
 float theta[] = {0, 0, 0};
@@ -17,6 +18,7 @@ float theta[] = {0, 0, 0};
 #include "audio.c"
 #include "loadModels.c"
 #include "star.c"
+#include "bullet.c"
 #include "asteroid.c"
 #include "starship.c"
 
@@ -48,6 +50,11 @@ void display() {
   glEnable(GL_LIGHT5);
     stars(&count1);
   glDisable(GL_LIGHT5);
+
+  glEnable(GL_LIGHT6);
+  if(!done)    
+    bullets();
+  glDisable(GL_LIGHT6);
 
   glFlush();
   glutSwapBuffers();
@@ -82,6 +89,7 @@ int main (int argc, char *argv[]) {
   glutReshapeFunc(reshape);
   glutSpecialFunc(moveStarship);
   glutIdleFunc(moveAsteroid);
+  glutKeyboardFunc(fireRounds);
   
   glutMainLoop();
 

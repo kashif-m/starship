@@ -13,7 +13,8 @@ struct Model {
   int cx, cy, cz,
     xMax, xMin,
     yMax, yMin,
-    zMax, zMin;
+    zMax, zMin,
+    sizeX, sizeY, sizeZ;
 };
 
 char lineHeader[128];
@@ -96,11 +97,13 @@ void updateValues(char type, int i, float *ptr) {
 }
 
 void computeCenter(struct Model* model) {
-  model->cx = (model->xMax + model->xMin) / 2;
-  model->cy = (model->yMax + model->yMin) / 2;
-  model->cz = (model->zMax + model->zMin) / 2;
+  model->sizeX = fabs(model->xMax) + fabs(model->xMin);
+  model->sizeY = fabs(model->yMax) + fabs(model->yMin);
+  model->sizeZ = fabs(model->zMax) + fabs(model->zMin);
 
-  printf("%d %d %d\n", model->cx, model->cy, model->cz);
+  model->cx = (model->xMax) + (model->xMin) / 2;
+  model->cy = (model->yMax) + (model->yMin) / 2;
+  model->cz = (model->zMax) + (model->zMin) / 2;
 }
 
 void loadModel(struct Model* model, char filename[]) {

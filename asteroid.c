@@ -1,24 +1,25 @@
 
-#define MAX_ASTEROIDS 100
-#define MIN_SPEED_ASTEROID 5
-#define MAX_SPEED_ASTEROID 15
+#define MAX_ASTEROIDS 10
+#define MIN_SPEED_ASTEROID 20
+#define MAX_SPEED_ASTEROID 35
 #define SPAWN_FREQUENCY_ASTEROID 100
 
 int ASTEROID_COUNT = 0;
 
-struct asteroid {
+struct Asteroid {
   int tx, ty, tz,
     rx, ry, rz,
     speed, done;
   float sx, sy, sz;
 };
 
-struct asteroid A[MAX_ASTEROIDS];
+struct Asteroid A[MAX_ASTEROIDS];
 
 // idle function
 void moveAsteroid() {
 
   moveStar();
+  moveBullet();
   if(theta[0] > 360)
     theta[0] = 0;
   theta[0] += 1;
@@ -34,7 +35,7 @@ void moveAsteroid() {
   glutPostRedisplay();
 }
 
-void initialise(struct asteroid* a, int x, int y, int z, float sx, float sy, float sz, int speed) {
+void initialise(struct Asteroid* a, int x, int y, int z, float sx, float sy, float sz, int speed) {
   a->tx = x; a->ty = y; a->tz = z;
   a->done = 0;
   a->rx = 0;
@@ -44,7 +45,7 @@ void initialise(struct asteroid* a, int x, int y, int z, float sx, float sy, flo
   a->speed = speed;
 }
 
-void plotAsteroid(struct asteroid a) {
+void plotAsteroid(struct Asteroid a) {
 
   glPushMatrix();
     glScalef(a.sx, a.sy, a.sz);

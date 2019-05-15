@@ -1,7 +1,6 @@
 
-#define NEAR_VAL 200
-#define FAR_VAL SCREEN_DEPTH*1.5
-
+#define NEAR_VAL 500
+#define FAR_VAL SCREEN_DEPTH*5
 float h, s, l;
 
 void asteroidTopLight() {
@@ -70,6 +69,18 @@ void starsLight() {
 	glLightfv(GL_LIGHT5, GL_POSITION, light_position);
 }
 
+void bulletLight() {
+
+	// red
+	GLfloat mat_ambient[] = { 1, .5, 0, 1.0 };
+	GLfloat light_position[] = { 0, 0, 1000, 0.0 };
+
+	glLightfv(GL_LIGHT6, GL_AMBIENT, mat_ambient);
+	glLightfv(GL_LIGHT6, GL_DIFFUSE, mat_ambient);
+	glLightfv(GL_LIGHT6, GL_POSITION, light_position);
+}
+
+
 // init
 void init() {
 
@@ -87,6 +98,7 @@ void init() {
 	spaceshipCenterLight();
 	spaceshipRightLight();
 	starsLight();
+	bulletLight();
 
 	// material
 	GLfloat mat[] = { 1, 1, 1, 0 };
@@ -110,6 +122,7 @@ void reshape(int w, int h) {
 	float negX = -w / 2, posX = w / 2,
 				negY = -h / 2, posY = h / 2;
 
+	gluLookAt(0, 0, 0, 0, 0, -100, 0, 1, 0);
 	glFrustum(negX, posX, negY, posY, NEAR_VAL, FAR_VAL);
 	glMatrixMode(GL_MODELVIEW);
 }

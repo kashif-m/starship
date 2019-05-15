@@ -1,6 +1,6 @@
 
-#define MAX_STARS 1000
-#define MIN_SPEED_STAR 10
+#define MAX_STARS 500
+#define MIN_SPEED_STAR 50
 #define SPAWN_FREQUENCY_STAR 1
 #define MAX_RADIUS 2
 
@@ -42,19 +42,13 @@ void plotStar(struct star s) {
 void spawnStar(int i) {
 
   int x, y, z, speed, radius;
-  x = (rand() % SCREEN_WIDTH + 1) - (SCREEN_WIDTH / 2);
-  y = (rand() % SCREEN_HEIGHT + 1) - (SCREEN_HEIGHT / 2);
+  x = (rand() % CURRENT_WIDTH + 1) - (CURRENT_WIDTH / 2);
+  y = (rand() % CURRENT_HEIGHT + 1) - (CURRENT_HEIGHT / 2);
   z = -FAR_VAL - 100;
   speed = (rand() % 10 + 1);
   radius = (rand() % MAX_RADIUS + 1);
   if(speed < MIN_SPEED_STAR)
     speed = MIN_SPEED_STAR;
-
-  float sx, sy, sz;
-  sx = ((float)rand()) / ((float)RAND_MAX) / 2.0 + 0.3;
-  sy = ((float)rand()) / ((float)RAND_MAX) / 2.0 + 0.3;
-  sz = ((float)rand()) / ((float)RAND_MAX) / 2.0 + 0.3;
-
 
   initialiseStar(&S[i], x, y, z, radius, speed);
   STAR_COUNT++;
