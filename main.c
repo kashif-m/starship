@@ -49,7 +49,7 @@ int main (int argc, char *argv[]) {
 
   // load models
   loadModel(&asteroid, "Asteroid1.obj");
-  loadModel(&starship, "Starship.obj");
+  loadModel(&starship, "StarshipNew.obj");
 
   srand(time(0));
   spawnAsteroid(0);

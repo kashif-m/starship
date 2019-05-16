@@ -38,7 +38,6 @@ void plotModel(struct Model* model, char type) {
   for(i = 0; i < model->TOTAL_FACES; i++) {
     int j;
     
-    glColor3f(1.0,0.5,0.0);
     if(type == 'P')
       glBegin(GL_POLYGON);
     else if(type == 'L')
@@ -132,14 +131,6 @@ void scale(struct Model* model, char axis, float val) {
 
 void computeCenter(struct Model* model, char type) {
 
-  if (type == 's') {
-    scale(model, 'x', 4);
-    scale(model, 'y', 4);
-    scale(model, 'z', 4);
-    translate(model, 'y', -11);
-    translate(model, 'z', -700);
-  }
-
   model->cx = (model->xMax + model->xMin) / 2;
   model->cy = (model->yMax + model->yMin) / 2;
   model->cz = (model->zMax + model->zMin) / 2;
@@ -148,8 +139,8 @@ void computeCenter(struct Model* model, char type) {
   model->sizeY = fabs(model->yMax - model->yMin);
   model->sizeZ = fabs(model->zMax - model->zMin);
 
-  // printf("%d %d %d\n", model->sizeX, model->sizeY, model->sizeZ);
-  // printf("%d %d %d\n", model->cx, model->cy, model->cz);
+  printf("%d %d %d\n", model->sizeX, model->sizeY, model->sizeZ);
+  printf("%d %d %d\n", model->cx, model->cy, model->cz);
 }
 
 void loadModel(struct Model* model, char filename[]) {

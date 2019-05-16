@@ -1,5 +1,5 @@
 
-#define MAX_ASTEROIDS 1
+#define MAX_ASTEROIDS 10000
 #define MIN_SPEED_ASTEROID 20
 #define MAX_SPEED_ASTEROID 40
 #define SPAWN_FREQUENCY_ASTEROID 50
@@ -22,7 +22,7 @@ void moveAsteroid() {
   int i;
   for(i = 0; i < ASTEROID_COUNT; i++) {
     A[i].tz += A[i].speed;
-    A[i].cz += (A[i].speed *A[i].sz);
+    A[i].cz += A[i].speed * A[i].sz;
     if(A[i].tz > -NEAR_VAL)
       A[i].done = 1;
     if(A[i].rx > 360)
@@ -39,13 +39,15 @@ void initialise(struct Asteroid* a, int x, int y, int z, float sx, float sy, flo
   a->sx = sx;
   a->sy = sy;
   a->sz = sz;
-  a->speed = speed;
+  a->speed = 40;
 
   a->cx = x * sx;
   a->cy = y * sy;
   a->cz = z * sz;
 
-  printf("%d %d %d\n", a->cx, a->cy, a->cz);
+  a->sizeX = asteroid.sizeX * sx;
+  a->sizeY = asteroid.sizeY * sy;
+  a->sizeZ = asteroid.sizeZ * sz;
 }
 
 void plotAsteroid(struct Asteroid a) {

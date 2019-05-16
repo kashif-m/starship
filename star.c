@@ -16,9 +16,14 @@ struct star S[MAX_STARS];
 // idle function
 void moveStar() {
 
+	spaceshipLeftLight();
+	spaceshipCenterLight();
+	spaceshipRightLight();
+
   moveAsteroid();
   moveBullet();
-  detectCollision();
+  detectStarshipCollision();
+  detectBulletCollision();
   int i;
   for(i = 0; i < STAR_COUNT; i++) {
     S[i].tz += S[i].speed;

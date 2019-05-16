@@ -25,7 +25,7 @@ void asteroidCollisonFrame() {
 
   int i;
   for(i = 0; i < MAX_ASTEROIDS; i++) {
-    int pos[] = {A[i].cx, A[i].cy, A[i].cz};
+    int pos[] = {A[i].cx, A[i].cy, A[i].cz - starship.sizeZ / 8};
     int size[] = {A[i].sizeX, A[i].sizeY, A[i].sizeZ};
     plotCollisionFrame(pos, size);
   }
@@ -36,8 +36,14 @@ void plotStars(int* count) {
     stars(count);
     int pos[] = {starship.cx, starship.cy, starship.cz};
     int size[] = {starship.sizeX, starship.sizeY, starship.sizeZ};
-    plotCollisionFrame(pos, size);
+    // plotCollisionFrame(pos, size);
     // asteroidCollisonFrame();
+    pos[0] = tx - 130; size[0] = 50;
+    pos[1] = ty; size[1] = 50;
+    pos[2] = tz; size[2] = 50;
+    // plotCollisionFrame(pos, size);
+    pos[0] = tx + 130;
+    // plotCollisionFrame(pos, size);
   glDisable(GL_LIGHT5);
 }
 
