@@ -1,5 +1,5 @@
 
-#define MAX_STARS 5000
+#define MAX_STARS 50
 #define MIN_SPEED_STAR 40
 #define SPAWN_FREQUENCY_STAR 1
 #define MAX_RADIUS 2

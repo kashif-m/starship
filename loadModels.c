@@ -130,13 +130,15 @@ void scale(struct Model* model, char axis, float val) {
   }
 }
 
-void computeCenter(struct Model* model) {
+void computeCenter(struct Model* model, char type) {
 
-  scale(model, 'x', 4);
-  scale(model, 'y', 4);
-  scale(model, 'z', 4);
-  translate(model, 'y', -11);
-  translate(model, 'z', -700);
+  if (type == 's') {
+    scale(model, 'x', 4);
+    scale(model, 'y', 4);
+    scale(model, 'z', 4);
+    translate(model, 'y', -11);
+    translate(model, 'z', -700);
+  }
 
   model->cx = (model->xMax + model->xMin) / 2;
   model->cy = (model->yMax + model->yMin) / 2;
@@ -145,6 +147,9 @@ void computeCenter(struct Model* model) {
   model->sizeX = fabs(model->xMax - model->xMin);
   model->sizeY = fabs(model->yMax - model->yMin);
   model->sizeZ = fabs(model->zMax - model->zMin);
+
+  // printf("%d %d %d\n", model->sizeX, model->sizeY, model->sizeZ);
+  // printf("%d %d %d\n", model->cx, model->cy, model->cz);
 }
 
 void loadModel(struct Model* model, char filename[]) {
@@ -196,5 +201,8 @@ void loadModel(struct Model* model, char filename[]) {
   }
   fclose(fv);
   model->TOTAL_FACES = o;
-  computeCenter(model);
+  if (!strcmp(filename, "Starship.obj"))
+    computeCenter(model, 's');
+  else
+    computeCenter(model, 'a');
 }

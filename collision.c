@@ -1,116 +1,115 @@
 
-void back() {
+void front(int pos[], int size[]) {
   glBegin(GL_LINE_LOOP);
-    glVertex3f(starship.cx + starship.sizeX / 2,
-      starship.cy + starship.sizeY / 2,
-      starship.cz / 1.13 + starship.sizeZ / 2);
-    glVertex3f(starship.cx + starship.sizeX / 2,
-      starship.cy - starship.sizeY / 2,
-      starship.cz / 1.13 + starship.sizeZ / 2);
-    glVertex3f(starship.cx - starship.sizeX / 2,
-      starship.cy - starship.sizeY / 2,
-      starship.cz / 1.13 + starship.sizeZ / 2);
-    glVertex3f(starship.cx - starship.sizeX / 2,
-      starship.cy + starship.sizeY / 2,
-      starship.cz / 1.13 + starship.sizeZ / 2);
+    glVertex3f(pos[0] + size[0] / 2,
+      pos[1] + size[1] / 2,
+      pos[2] / 1.13 + size[2] / 2);
+    glVertex3f(pos[0] + size[0] / 2,
+      pos[1] - size[1] / 2,
+      pos[2] / 1.13 + size[2] / 2);
+    glVertex3f(pos[0] - size[0] / 2,
+      pos[1] - size[1] / 2,
+      pos[2] / 1.13 + size[2] / 2);
+    glVertex3f(pos[0] - size[0] / 2,
+      pos[1] + size[1] / 2,
+      pos[2] / 1.13 + size[2] / 2);
   glEnd();
 }
 
-void right() {
+void back(int pos[], int size[]) {
   glBegin(GL_LINE_LOOP);
-    glVertex3f(starship.cx + starship.sizeX / 2,
-      starship.cy + starship.sizeY / 2,
-      starship.cz / 1.13 + starship.sizeZ / 2);
-    glVertex3f(starship.cx + starship.sizeX / 2,
-      starship.cy - starship.sizeY / 2,
-      starship.cz / 1.13 + starship.sizeZ / 2);
-    glVertex3f(starship.cx + starship.sizeX / 2,
-      starship.cy - starship.sizeY / 2,
-      starship.cz / 1.13 - starship.sizeZ / 2);
-    glVertex3f(starship.cx + starship.sizeX / 2,
-      starship.cy + starship.sizeY / 2,
-      starship.cz / 1.13 - starship.sizeZ / 2);
+    glVertex3f(pos[0] + size[0] / 2,
+      pos[1] + size[1] / 2,
+      pos[2] / 1.13 - size[2] / 2);
+    glVertex3f(pos[0] + size[0] / 2,
+      pos[1] - size[1] / 2,
+      pos[2] / 1.13 - size[2] / 2);
+    glVertex3f(pos[0] - size[0] / 2,
+      pos[1] - size[1] / 2,
+      pos[2] / 1.13 - size[2] / 2);
+    glVertex3f(pos[0] - size[0] / 2,
+      pos[1] + size[1] / 2,
+      pos[2] / 1.13 - size[2] / 2);
   glEnd();
 }
 
-void left() {
+void right(int pos[], int size[]) {
   glBegin(GL_LINE_LOOP);
-    glVertex3f(starship.cx - starship.sizeX / 2,
-      starship.cy + starship.sizeY / 2,
-      starship.cz / 1.13 + starship.sizeZ / 2);
-    glVertex3f(starship.cx - starship.sizeX / 2,
-      starship.cy - starship.sizeY / 2,
-      starship.cz / 1.13 + starship.sizeZ / 2);
-    glVertex3f(starship.cx - starship.sizeX / 2,
-      starship.cy - starship.sizeY / 2,
-      starship.cz / 1.13 - starship.sizeZ / 2);
-    glVertex3f(starship.cx - starship.sizeX / 2,
-      starship.cy + starship.sizeY / 2,
-      starship.cz / 1.13 - starship.sizeZ / 2);
+    glVertex3f(pos[0] + size[0] / 2,
+      pos[1] + size[1] / 2,
+      pos[2] / 1.13 + size[2] / 2);
+    glVertex3f(pos[0] + size[0] / 2,
+      pos[1] - size[1] / 2,
+      pos[2] / 1.13 + size[2] / 2);
+    glVertex3f(pos[0] + size[0] / 2,
+      pos[1] - size[1] / 2,
+      pos[2] / 1.13 - size[2] / 2);
+    glVertex3f(pos[0] + size[0] / 2,
+      pos[1] + size[1] / 2,
+      pos[2] / 1.13 - size[2] / 2);
   glEnd();
 }
 
-void front() {
+void left(int pos[], int size[]) {
   glBegin(GL_LINE_LOOP);
-    glVertex3f(starship.cx + starship.sizeX / 2,
-      starship.cy + starship.sizeY / 2,
-      starship.cz / 1.13 - starship.sizeZ / 2);
-    glVertex3f(starship.cx + starship.sizeX / 2,
-      starship.cy - starship.sizeY / 2,
-      starship.cz / 1.13 - starship.sizeZ / 2);
-    glVertex3f(starship.cx - starship.sizeX / 2,
-      starship.cy - starship.sizeY / 2,
-      starship.cz / 1.13 - starship.sizeZ / 2);
-    glVertex3f(starship.cx - starship.sizeX / 2,
-      starship.cy + starship.sizeY / 2,
-      starship.cz / 1.13 - starship.sizeZ / 2);
+    glVertex3f(pos[0] - size[0] / 2,
+      pos[1] + size[1] / 2,
+      pos[2] / 1.13 + size[2] / 2);
+    glVertex3f(pos[0] - size[0] / 2,
+      pos[1] - size[1] / 2,
+      pos[2] / 1.13 + size[2] / 2);
+    glVertex3f(pos[0] - size[0] / 2,
+      pos[1] - size[1] / 2,
+      pos[2] / 1.13 - size[2] / 2);
+    glVertex3f(pos[0] - size[0] / 2,
+      pos[1] + size[1] / 2,
+      pos[2] / 1.13 - size[2] / 2);
   glEnd();
 }
 
-void top() {
+void top(int pos[], int size[]) {
   glBegin(GL_LINE_LOOP);
-    glVertex3f(starship.cx + starship.sizeX / 2,
-      starship.cy + starship.sizeY / 2,
-      starship.cz / 1.13 + starship.sizeZ / 2);
-    glVertex3f(starship.cx + starship.sizeX / 2,
-      starship.cy + starship.sizeY / 2,
-      starship.cz / 1.13 - starship.sizeZ / 2);
-    glVertex3f(starship.cx - starship.sizeX / 2,
-      starship.cy + starship.sizeY / 2,
-      starship.cz / 1.13 - starship.sizeZ / 2);
-    glVertex3f(starship.cx - starship.sizeX / 2,
-      starship.cy + starship.sizeY / 2,
-      starship.cz / 1.13 + starship.sizeZ / 2);
+    glVertex3f(pos[0] + size[0] / 2,
+      pos[1] + size[1] / 2,
+      pos[2] / 1.13 + size[2] / 2);
+    glVertex3f(pos[0] + size[0] / 2,
+      pos[1] + size[1] / 2,
+      pos[2] / 1.13 - size[2] / 2);
+    glVertex3f(pos[0] - size[0] / 2,
+      pos[1] + size[1] / 2,
+      pos[2] / 1.13 - size[2] / 2);
+    glVertex3f(pos[0] - size[0] / 2,
+      pos[1] + size[1] / 2,
+      pos[2] / 1.13 + size[2] / 2);
   glEnd();
 }
 
-void bottom() {
+void bottom(int pos[], int size[]) {
   glBegin(GL_LINE_LOOP);
-    glVertex3f(starship.cx + starship.sizeX / 2,
-      starship.cy - starship.sizeY / 2,
-      starship.cz / 1.13 + starship.sizeZ / 2);
-    glVertex3f(starship.cx + starship.sizeX / 2,
-      starship.cy - starship.sizeY / 2,
-      starship.cz / 1.13 - starship.sizeZ / 2);
-    glVertex3f(starship.cx - starship.sizeX / 2,
-      starship.cy - starship.sizeY / 2,
-      starship.cz / 1.13 - starship.sizeZ / 2);
-    glVertex3f(starship.cx - starship.sizeX / 2,
-      starship.cy - starship.sizeY / 2,
-      starship.cz / 1.13 + starship.sizeZ / 2);
+    glVertex3f(pos[0] + size[0] / 2,
+      pos[1] - size[1] / 2,
+      pos[2] / 1.13 + size[2] / 2);
+    glVertex3f(pos[0] + size[0] / 2,
+      pos[1] - size[1] / 2,
+      pos[2] / 1.13 - size[2] / 2);
+    glVertex3f(pos[0] - size[0] / 2,
+      pos[1] - size[1] / 2,
+      pos[2] / 1.13 - size[2] / 2);
+    glVertex3f(pos[0] - size[0] / 2,
+      pos[1] - size[1] / 2,
+      pos[2] / 1.13 + size[2] / 2);
   glEnd();
 }
 
-void plotCollisionFrame() {
+void plotCollisionFrame(int pos[], int size[]) {
 
   glPushMatrix();
-    // glTranslate(0, 100, 0);
-    back();
-    right();
-    left();
-    front();
-    top();
-    bottom();
+    left(pos, size);
+    right(pos, size);
+    top(pos, size);
+    bottom(pos, size);
+    front(pos, size);
+    back(pos, size);
   glPopMatrix();
 }
 

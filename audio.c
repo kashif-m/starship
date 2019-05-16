@@ -11,6 +11,5 @@ void startAudio() {
   if (x < 0)
     puts("ERR: fork failure");
   else if (x == 0)
-    return;
-    // execlp("mpg123", "mpg123", "-q", "./lpwu.mp3", 0);
+    execlp("mpg123", "mpg123", "-q", "./lpwu.mp3", 0);
 }

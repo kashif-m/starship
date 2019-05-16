@@ -84,7 +84,7 @@ void bulletLight() {
 void init() {
 
 	glutFullScreen();
-	// glutSetCursor(GLUT_CURSOR_NONE);
+	glutSetCursor(GLUT_CURSOR_NONE);
 	glPointSize(10);
 	glShadeModel(GL_SMOOTH);
 	

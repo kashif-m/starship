@@ -24,7 +24,7 @@ void plotStarship() {
     glTranslatef(0, 0, -700);
     glScalef(0.25, 0.25, 0.25);
     glTranslatef(5*CX, 5*CY, 0);
-    glRotatef(180, 0, 1, 0);  
+    glRotatef(180, 0, 1, 0);
     glColor3f(1, 0, 1);
     plotModel(&starship, 'P');
   glPopMatrix();
