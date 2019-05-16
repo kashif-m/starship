@@ -1,6 +1,6 @@
 
 #define NEAR_VAL 500
-#define FAR_VAL SCREEN_DEPTH*5
+#define FAR_VAL NEAR_VAL*5
 float h, s, l;
 
 void asteroidTopLight() {
@@ -80,11 +80,11 @@ void bulletLight() {
 	glLightfv(GL_LIGHT6, GL_POSITION, light_position);
 }
 
-
 // init
 void init() {
 
-	glLineWidth(1.5);
+	glutFullScreen();
+	// glutSetCursor(GLUT_CURSOR_NONE);
 	glPointSize(10);
 	glShadeModel(GL_SMOOTH);
 	
@@ -123,7 +123,7 @@ void reshape(int w, int h) {
 	float negX = -w / 2, posX = w / 2,
 				negY = -h / 2, posY = h / 2;
 
-	// gluLookAt(0, 0, 0, 0, 0, -100, 0, 1, 0);
-	glFrustum(negX, posX, negY, posY, NEAR_VAL, FAR_VAL);
+	gluLookAt(0, 0, 0, 0, 0, -100, 0, 1, 0);
+	glFrustum(negX, posX, negY, posY, NEAR_VAL, 1000000);
 	glMatrixMode(GL_MODELVIEW);
 }

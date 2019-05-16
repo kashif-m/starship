@@ -1,8 +1,8 @@
 
-#define MAX_ASTEROIDS 10
+#define MAX_ASTEROIDS 100
 #define MIN_SPEED_ASTEROID 20
-#define MAX_SPEED_ASTEROID 35
-#define SPAWN_FREQUENCY_ASTEROID 100
+#define MAX_SPEED_ASTEROID 40
+#define SPAWN_FREQUENCY_ASTEROID 50
 
 int ASTEROID_COUNT = 0;
 
@@ -11,18 +11,14 @@ struct Asteroid {
     rx, ry, rz,
     speed, done;
   float sx, sy, sz;
+  int cx, cy, cz,
+    sizeX, sizeY, sizeZ;
 };
 
 struct Asteroid A[MAX_ASTEROIDS];
 
-// idle function
 void moveAsteroid() {
 
-  moveStar();
-  moveBullet();
-  if(theta[0] > 360)
-    theta[0] = 0;
-  theta[0] += 1;
   int i;
   for(i = 0; i < ASTEROID_COUNT; i++) {
     A[i].tz += A[i].speed;
@@ -32,7 +28,6 @@ void moveAsteroid() {
       A[i].rx = 0;
     A[i].rx += 5;
   }
-  glutPostRedisplay();
 }
 
 void initialise(struct Asteroid* a, int x, int y, int z, float sx, float sy, float sz, int speed) {
@@ -59,9 +54,9 @@ void plotAsteroid(struct Asteroid a) {
 void spawnAsteroid(int i) {
 
   int x, y, z, speed;
-  x = (rand() % SCREEN_WIDTH*3 + 1) - (SCREEN_WIDTH*3 / 2);
-  y = (rand() % SCREEN_HEIGHT*3 + 1) - (SCREEN_HEIGHT*3 / 2);
-  z = -FAR_VAL - 100;
+  x = (rand() % SCREEN_WIDTH * 2 + 1) - (SCREEN_WIDTH * 2 / 2);
+  y = (rand() % SCREEN_HEIGHT * 2 + 1) - (SCREEN_HEIGHT * 2 / 2);
+  z = -FAR_VAL*2;
   speed = (rand() % MAX_SPEED_ASTEROID + 1);
   if(speed < MIN_SPEED_ASTEROID)
     speed = MIN_SPEED_ASTEROID;

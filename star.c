@@ -1,8 +1,8 @@
 
-#define MAX_STARS 500
-#define MIN_SPEED_STAR 50
+#define MAX_STARS 5000
+#define MIN_SPEED_STAR 40
 #define SPAWN_FREQUENCY_STAR 1
-#define MAX_RADIUS 3
+#define MAX_RADIUS 2
 
 int STAR_COUNT = 0;
 
@@ -13,14 +13,20 @@ struct star {
 
 struct star S[MAX_STARS];
 
+// idle function
 void moveStar() {
 
+  moveAsteroid();
+  moveBullet();
+  detectCollision();
   int i;
   for(i = 0; i < STAR_COUNT; i++) {
     S[i].tz += S[i].speed;
     if(S[i].tz > -NEAR_VAL)
       S[i].done = 1;
   }
+
+  glutPostRedisplay();
 }
 
 void initialiseStar(struct star* s, int x, int y, int z, int radius, int speed) {
@@ -42,9 +48,9 @@ void plotStar(struct star s) {
 void spawnStar(int i) {
 
   int x, y, z, speed, radius;
-  x = (rand() % CURRENT_WIDTH + 1) - (CURRENT_WIDTH / 2);
-  y = (rand() % CURRENT_HEIGHT + 1) - (CURRENT_HEIGHT / 2);
-  z = -FAR_VAL - 100;
+  x = (rand() % CURRENT_WIDTH * 2 + 1) - (CURRENT_WIDTH * 2 / 2);
+  y = (rand() % CURRENT_HEIGHT * 2 + 1) - (CURRENT_HEIGHT * 2 / 2);
+  z = -FAR_VAL;
   speed = (rand() % 10 + 1);
   radius = (rand() % MAX_RADIUS + 1);
   if(speed < MIN_SPEED_STAR)

@@ -65,25 +65,25 @@ int max(int a, int b) {
   return a > b ? a : b;
 }
 
-void computeMinMax(int x, int y, int z) {
+void computeMinMax(struct Model* model, int x, int y, int z) {
 
-  starship.xMin = min(starship.xMin, x);
-  starship.xMax = max(starship.xMax, x);
+  model->xMin = min(model->xMin, x);
+  model->xMax = max(model->xMax, x);
 
-  starship.yMin = min(starship.yMin, y);
-  starship.yMax = max(starship.yMax, y);
+  model->yMin = min(model->yMin, y);
+  model->yMax = max(model->yMax, y);
 
-  starship.zMin = min(starship.zMin, z);
-  starship.zMax = max(starship.zMax, z);
+  model->zMin = min(model->zMin, z);
+  model->zMax = max(model->zMax, z);
 }
 
-void updateValues(char type, int i, float *ptr) {
+void updateValues(struct Model* model, char type, int i, float *ptr) {
 
   float v[3];
   int j;
   sscanf(lineHeader, "%f %f %f", &v[0], &v[1], &v[2]);
   switch(type) {
-    case 'v': computeMinMax(v[0], v[1], v[2]);
+    case 'v': computeMinMax(model, v[0], v[1], v[2]);
               for(j = 0; j < 3; j++)
                 *(ptr + (i*3) + j) = v[j];
               break;
@@ -96,14 +96,55 @@ void updateValues(char type, int i, float *ptr) {
   }
 }
 
-void computeAttributes(struct Model* model) {
-  model->sizeX = fabs(model->xMax) + fabs(model->xMin);
-  model->sizeY = fabs(model->yMax) + fabs(model->yMin);
-  model->sizeZ = fabs(model->zMax) + fabs(model->zMin);
+void translate(struct Model* model, char axis, float val) {
+  switch(axis) {
+    case 'x':
+        model->xMax += val;
+        model->xMin += val;
+        break;
+    case 'y':
+        model->yMax += val;
+        model->yMin += val;
+        break;
+    case 'z':
+        model->zMax += val;
+        model->zMin += val;
+        break;
+  }
+}
+
+void scale(struct Model* model, char axis, float val) {
+  switch(axis) {
+    case 'x':
+        model->xMax /= val;
+        model->xMin /= val;
+        break;
+    case 'y':
+        model->yMax /= val;
+        model->yMin /= val;
+        break;
+    case 'z':
+        model->zMax /= val;
+        model->zMin /= val;
+        break;
+  }
+}
+
+void computeCenter(struct Model* model) {
+
+  scale(model, 'x', 4);
+  scale(model, 'y', 4);
+  scale(model, 'z', 4);
+  translate(model, 'y', -11);
+  translate(model, 'z', -700);
 
   model->cx = (model->xMax + model->xMin) / 2;
   model->cy = (model->yMax + model->yMin) / 2;
   model->cz = (model->zMax + model->zMin) / 2;
+
+  model->sizeX = fabs(model->xMax - model->xMin);
+  model->sizeY = fabs(model->yMax - model->yMin);
+  model->sizeZ = fabs(model->zMax - model->zMin);
 }
 
 void loadModel(struct Model* model, char filename[]) {
@@ -142,18 +183,18 @@ void loadModel(struct Model* model, char filename[]) {
     } else if (strcmp(lineHeader, "v") == 0) {
 
       readLine(fv);
-      updateValues('v', i++, &model->vertex[0][0]);
+      updateValues(model, 'v', i++, &model->vertex[0][0]);
     } else if (strcmp(lineHeader, "vt") == 0) {
 
       readLine(fv);
-      updateValues('t', k++, &model->texture[0][0]);
+      updateValues(model, 't', k++, &model->texture[0][0]);
     } else if (strcmp(lineHeader, "vn") == 0) {
 
       readLine(fv);
-      updateValues('n', m++, &model->normal[0][0]);
+      updateValues(model, 'n', m++, &model->normal[0][0]);
     }
   }
   fclose(fv);
   model->TOTAL_FACES = o;
-  computeAttributes(model);
+  computeCenter(model);
 }

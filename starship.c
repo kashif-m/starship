@@ -1,40 +1,29 @@
 
-// special function
-void moveStarship(int key, int X, int Y) {
+int CX = 0, CY = -1500 / 5;
 
-  switch(key) {
-    case GLUT_KEY_UP:
-      if(starship.cy < CURRENT_HEIGHT * 3)
-        starship.cy += 250;
-      break;
-
-    case GLUT_KEY_DOWN:
-      if(starship.cy > -CURRENT_HEIGHT + 200)
-        starship.cy -= 250;
-      break;
-
-    case GLUT_KEY_RIGHT:
-      if(starship.cx < CURRENT_WIDTH * 2)
-        starship.cx += 250;
-      break;
+// VERY special function
+void moveStarship(int X, int Y) {
+        
+    if (X < CURRENT_WIDTH/2 && starship.cx > -CURRENT_WIDTH * 3)
+      CX = (-(CURRENT_WIDTH/2) + X) / 1.3;
+    else if (X > CURRENT_WIDTH/2 && starship.cx < CURRENT_WIDTH * 3)
+      CX = (X - (CURRENT_WIDTH/2)) / 1.3;
     
-    case GLUT_KEY_LEFT:
-      if(starship.cx > -CURRENT_WIDTH * 2)
-        starship.cx -= 250;
-      break;
+    if (Y < CURRENT_HEIGHT/2 && starship.cy < CURRENT_HEIGHT * 3)
+      CY = ((CURRENT_HEIGHT/2) - Y) / 1.4;
+    else if (Y > CURRENT_HEIGHT/2 && starship.cy > -CURRENT_HEIGHT * 3)
+      CY = -(Y - (CURRENT_HEIGHT/2)) / 1.3;
 
-    default:
-      break;
-  }
-
+    starship.cx = 1.2*CX;
+    starship.cy = 1.2*CY;
   glutPostRedisplay();
 }
 
 void plotStarship() {
   glPushMatrix();
-    glTranslatef(0, -(CURRENT_HEIGHT / 2) + 200, -820);
+    glTranslatef(0, 0, -700);
     glScalef(0.25, 0.25, 0.25);
-    glTranslatef(starship.cx, starship.cy, 0);
+    glTranslatef(5*CX, 5*CY, 0);
     glRotatef(180, 0, 1, 0);  
     glColor3f(1, 0, 1);
     plotModel(&starship, 'P');
@@ -43,9 +32,9 @@ void plotStarship() {
 
 void plotStarshipWire() {
   glPushMatrix();
-    glTranslatef(0, -(CURRENT_HEIGHT / 2) + 200, -820);
+    glTranslatef(0, 0, -700);
     glScalef(0.25, 0.25, 0.25);
-    glTranslatef(starship.cx, starship.cy, 0);
+    glTranslatef(5*CX, 5*CY, 0);
     glRotatef(180, 0, 1, 0);
     glColor3f(1, 0, 1);
     plotModel(&starship, 'L');
