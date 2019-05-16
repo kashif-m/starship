@@ -1,5 +1,5 @@
 
-#define MAX_ASTEROIDS 10000
+#define MAX_ASTEROIDS 100
 #define MIN_SPEED_ASTEROID 20
 #define MAX_SPEED_ASTEROID 40
 #define SPAWN_FREQUENCY_ASTEROID 50
@@ -64,8 +64,8 @@ void plotAsteroid(struct Asteroid a) {
 void spawnAsteroid(int i) {
 
   int x, y, z, speed;
-  x = (rand() % SCREEN_WIDTH * 2 + 1) - (SCREEN_WIDTH * 2 / 2);
-  y = (rand() % SCREEN_HEIGHT * 2 + 1) - (SCREEN_HEIGHT * 2 / 2);
+  x = (rand() % CURRENT_WIDTH + 1) - (CURRENT_WIDTH / 2);
+  y = (rand() % CURRENT_HEIGHT + 1) - (CURRENT_HEIGHT / 2);
   z = -FAR_VAL*2;
   speed = (rand() % MAX_SPEED_ASTEROID + 1);
   if(speed < MIN_SPEED_ASTEROID)

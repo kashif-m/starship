@@ -117,16 +117,15 @@ void detectStarshipCollision() {
 
   int i;
   for(i = 0; i < MAX_ASTEROIDS; i++) {
-    // printf("%d %d %d\n", A[i].cx, A[i].cy, A[i].cz);
     if( fabs(A[i].cx - starship.cx) < fabs(A[i].sizeX / 2 + starship.sizeX / 2)) {
       if( fabs(A[i].cy - starship.cy) < fabs(A[i].sizeY / 2 + starship.sizeY / 2)) {
         if(fabs(A[i].cz - starship.cz) < fabs(A[i].sizeZ / 2 + starship.sizeZ / 2)) {
           A[i].done = 1;
+          showStarship = false;
         }
       }
     }
   }
-  printf("\n");
 }
 
 void detectBulletCollision() {
@@ -138,10 +137,9 @@ void detectBulletCollision() {
       if( fabs(A[i].cy - ty) < fabs(A[i].sizeY / 2 + 25)) {
         if(fabs(A[i].cz - tz) < fabs(A[i].sizeZ / 2 + 25)) {
           A[i].done = 1;
-          tz = -FAR_VAL;
+          // tz = -FAR_VAL;
         }
       }
     }
   }
-  printf("\n");
 }

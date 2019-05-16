@@ -138,9 +138,6 @@ void computeCenter(struct Model* model, char type) {
   model->sizeX = fabs(model->xMax - model->xMin);
   model->sizeY = fabs(model->yMax - model->yMin);
   model->sizeZ = fabs(model->zMax - model->zMin);
-
-  printf("%d %d %d\n", model->sizeX, model->sizeY, model->sizeZ);
-  printf("%d %d %d\n", model->cx, model->cy, model->cz);
 }
 
 void loadModel(struct Model* model, char filename[]) {

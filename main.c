@@ -8,12 +8,14 @@
 #include <math.h>
 #include <stdbool.h>
 
-int count = 0, count1 = 0, CURRENT_WIDTH = 0, CURRENT_HEIGHT = 0;
+bool showStarship = true;
+int count = 0, count1 = 0, CURRENT_WIDTH = 1, CURRENT_HEIGHT = 1;
 
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1000
 #define SCREEN_DEPTH 1000
 
+#include "textPrinter.c"
 #include "glutFunctions.c"
 #include "audio.c"
 #include "loadModels.c"
@@ -29,11 +31,17 @@ void display() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glLoadIdentity();
 
-  plotAsteroids(&count);
-  plotStarship();
-  starshipWire();
+  if(showStarship) {
+    plotAsteroids(&count);
+    plotStarship();
+    starshipWire();
+    plotBullet();
+  } else {
+    glEnable(GL_LIGHT3);
+    drawString(0 - 100, 0, -500, "DEATH IN OUTER SPACE");
+    glEnable(GL_LIGHT3);
+  }
   plotStars(&count1);
-  plotBullet();
 
   glFlush();
   glutSwapBuffers();
@@ -45,7 +53,7 @@ void display() {
 int main (int argc, char *argv[]) {
 
   // audio
-  // startAudio();
+  startAudio();
 
   // load models
   loadModel(&asteroid, "Asteroid1.obj");
