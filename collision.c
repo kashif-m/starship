@@ -132,10 +132,10 @@ void detectBulletCollision() {
 
   int i;
   for(i = 0; i < MAX_ASTEROIDS; i++) {
-    if( fabs(A[i].cx - tx - 130) < fabs(A[i].sizeX / 2 + 25) ||
-          fabs(A[i].cx - tx + 130) < fabs(A[i].sizeX / 2 + 25)) {
-      if( fabs(A[i].cy - ty) < fabs(A[i].sizeY / 2 + 25)) {
-        if(fabs(A[i].cz - tz) < fabs(A[i].sizeZ / 2 + 25)) {
+    if (fabs(A[i].cx - tx - 130) < fabs(A[i].sizeX / 2) ||
+          fabs(A[i].cx - tx + 130) < fabs(A[i].sizeX / 2)) {
+      if (fabs(A[i].cy - ty) < fabs(A[i].sizeY / 2)) {
+        if (fabs(A[i].cz - tz) < fabs(A[i].sizeZ / 2)) {
           A[i].done = 1;
           // tz = -FAR_VAL;
         }

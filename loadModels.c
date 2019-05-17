@@ -20,6 +20,11 @@ struct Model {
 char lineHeader[128];
 struct Model starship, asteroid;
 
+void ModelInit(struct Model* model) {
+  model->xMax = model->yMax = model->zMax = -999;
+  model->xMin = model->yMin = model->zMin = 999;
+}
+
 void readLine(FILE *fp) {
   fscanf(fp, "%[^\n]", lineHeader);
 }
@@ -95,40 +100,6 @@ void updateValues(struct Model* model, char type, int i, float *ptr) {
   }
 }
 
-void translate(struct Model* model, char axis, float val) {
-  switch(axis) {
-    case 'x':
-        model->xMax += val;
-        model->xMin += val;
-        break;
-    case 'y':
-        model->yMax += val;
-        model->yMin += val;
-        break;
-    case 'z':
-        model->zMax += val;
-        model->zMin += val;
-        break;
-  }
-}
-
-void scale(struct Model* model, char axis, float val) {
-  switch(axis) {
-    case 'x':
-        model->xMax /= val;
-        model->xMin /= val;
-        break;
-    case 'y':
-        model->yMax /= val;
-        model->yMin /= val;
-        break;
-    case 'z':
-        model->zMax /= val;
-        model->zMin /= val;
-        break;
-  }
-}
-
 void computeCenter(struct Model* model, char type) {
 
   model->cx = (model->xMax + model->xMin) / 2;
@@ -142,6 +113,7 @@ void computeCenter(struct Model* model, char type) {
 
 void loadModel(struct Model* model, char filename[]) {
 
+  ModelInit(model);
   char file[] = "./models/";
   strcat(file, filename);
   FILE* fv = fopen(file, "r");

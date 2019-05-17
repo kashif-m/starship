@@ -36,14 +36,14 @@ void plotStars(int* count) {
     stars(count);
     int pos[] = {starship.cx, starship.cy, starship.cz};
     int size[] = {starship.sizeX, starship.sizeY, starship.sizeZ};
-    plotCollisionFrame(pos, size);
-    asteroidCollisonFrame();
+    // plotCollisionFrame(pos, size);
+    // asteroidCollisonFrame();
     pos[0] = tx - 130; size[0] = 50;
     pos[1] = ty; size[1] = 50;
     pos[2] = tz; size[2] = 50;
-    plotCollisionFrame(pos, size);
+    // plotCollisionFrame(pos, size);
     pos[0] = tx + 130;
-    plotCollisionFrame(pos, size);
+    // plotCollisionFrame(pos, size);
   glDisable(GL_LIGHT5);
 }
 

@@ -170,6 +170,7 @@ void reshape(int w, int h) {
 				negY = -h / 2, posY = h / 2;
 
 	glFrustum(negX, posX, negY, posY, NEAR_VAL, FAR_VAL);
-	// gluLookAt(500, 0, -900, 0, 0, -900, 0, 1, 0);
+	// // gluLookAt(700, 0, -700, 0, 0, -700, 0, 1, 0);
+	// glOrtho(negX, posX, negY, posY, NEAR_VAL, FAR_VAL);
 	glMatrixMode(GL_MODELVIEW);
 }
